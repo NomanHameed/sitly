@@ -12,6 +12,12 @@ class DashboardController
      */
     public function index()
     {
-        return view('frontend.user.dashboard');
+        $user = auth()->user();
+        if ($user->profile === null) {
+            return redirect()->route('frontend.welcome')->with('user');
+        } else {
+            dd($user);
+            return view('frontend.user.dashboard', ['user']);
+        }
     }
 }

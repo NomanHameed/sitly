@@ -69,7 +69,7 @@
     <body>
         @include('includes.partials.read-only')
         @include('includes.partials.logged-in-as')
-        @include('includes.partials.announcements')
+{{--        @include('includes.partials.announcements')--}}
 
         <div id="app" class="flex-center position-ref full-height">
             <div class="top-right links">
@@ -90,10 +90,10 @@
 
             <div class="content">
                 @include('includes.partials.messages')
-
-                <div class="title m-b-md">
-                    <welcome-component></welcome-component>
-                </div><!--title-->
+                <h3>Welcome to home page</h3>
+{{--                <div class="title m-b-md">--}}
+{{--                    <welcome-component></welcome-component>--}}
+{{--                </div><!--title-->--}}
 
             </div><!--content-->
         </div><!--app-->

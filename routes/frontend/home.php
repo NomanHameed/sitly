@@ -2,22 +2,21 @@
 
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\TermsController;
+use App\Http\Controllers\Frontend\User\ProfileController;
 use Tabuna\Breadcrumbs\Trail;
-
 /*
  * Frontend Controllers
  * All route names are prefixed with 'frontend.'.
  */
-Route::get('/', [HomeController::class, 'index'])
-    ->name('index')
+Route::get('/', [HomeController::class, 'index'])->name('index')
     ->breadcrumbs(function (Trail $trail) {
         $trail->push(__('Home'), route('frontend.index'));
     });
-Route::get('/welcome', [HomeController::class, 'index'])
-    ->name('welcome')
-    ->breadcrumbs(function (Trail $trail) {
-        $trail->push(__('Welcome'), route('frontend.pages.welcome'));
-    });
+Route::get('/welcome', [HomeController::class, 'welcome'])->name('welcome');
+//    ->breadcrumbs(function (Trail $trail) {
+//        $trail->push(__('Welcome'), route('frontend.pages.welcome'));
+//    });
+
 
 Route::get('terms', [TermsController::class, 'index'])
     ->name('pages.terms')

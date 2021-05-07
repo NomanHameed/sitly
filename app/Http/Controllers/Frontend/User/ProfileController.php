@@ -11,11 +11,16 @@ use App\Http\Requests\Frontend\User\UpdateProfileRequest;
 class ProfileController
 {
     /**
-     * @param  UpdateProfileRequest  $request
-     * @param  UserService  $userService
+     * @param UpdateProfileRequest $request
+     * @param UserService $userService
      *
      * @return mixed
      */
+    public function index()
+    {
+        return view('frontend.user.profile');
+    }
+
     public function update(UpdateProfileRequest $request, UserService $userService)
     {
         $userService->updateProfile($request->user(), $request->validated());

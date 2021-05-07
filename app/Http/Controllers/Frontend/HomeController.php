@@ -12,6 +12,11 @@ class HomeController
      */
     public function index()
     {
+
+        return view('frontend.index');
+    }
+    public function welcome()
+    {
         return view('frontend.pages.welcome');
     }
 }

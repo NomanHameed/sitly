@@ -13,6 +13,7 @@
         },
         methods:{
             moveNext(){
+
                 console.log('Move Next')
             }
         }

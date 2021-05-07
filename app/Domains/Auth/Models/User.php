@@ -8,6 +8,8 @@ use App\Domains\Auth\Models\Traits\Relationship\UserRelationship;
 use App\Domains\Auth\Models\Traits\Scope\UserScope;
 use App\Domains\Auth\Notifications\Frontend\ResetPasswordNotification;
 use App\Domains\Auth\Notifications\Frontend\VerifyEmail;
+use App\Models\Profile;
+use App\Models\UserChild;
 use DarkGhostHunter\Laraguard\Contracts\TwoFactorAuthenticatable;
 use DarkGhostHunter\Laraguard\TwoFactorAuthentication;
 use Database\Factories\UserFactory;
@@ -105,12 +107,14 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
     protected $with = [
         'permissions',
         'roles',
+        'profile',
+        'userChild',
     ];
 
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param string $token
      * @return void
      */
     public function sendPasswordResetNotification($token): void
@@ -145,7 +149,7 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
      */
     public function canBeImpersonated(): bool
     {
-        return ! $this->isMasterAdmin();
+        return !$this->isMasterAdmin();
     }
 
     /**
@@ -156,5 +160,18 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
     protected static function newFactory()
     {
         return UserFactory::new();
+    }
+
+//    public function user(){
+//        return $this->belongsTo(User::class);
+//    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+    public function userChild()
+    {
+        return $this->hasMany(UserChild::class);
     }
 }

@@ -11,20 +11,19 @@ use Tabuna\Breadcrumbs\Trail;
  * These routes can not be hit if the user has not confirmed their email
  */
 Route::group(['as' => 'user.', 'middleware' => ['auth', 'password.expires', config('boilerplate.access.middleware.verified')]], function () {
-    Route::get('profile', [DashboardController::class, 'index'])
-        ->middleware('is_user')
-        ->name('dashboard')
-        ->breadcrumbs(function (Trail $trail) {
-            $trail->parent('frontend.index')
-                ->push(__('Dashboard'), route('frontend.user.dashboard'));
-        });
-
     Route::get('dashboard', [DashboardController::class, 'index'])
         ->middleware('is_user')
         ->name('dashboard')
         ->breadcrumbs(function (Trail $trail) {
             $trail->parent('frontend.index')
                 ->push(__('Dashboard'), route('frontend.user.dashboard'));
+        });
+    Route::get('/profile', [ProfileController::class, 'index'])
+        ->middleware('is_user')
+        ->name('profile')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->parent('frontend.index')
+                ->push(__('Profile'), route('frontend.user.profile'));
         });
 
     Route::get('account', [AccountController::class, 'index'])
